@@ -4,6 +4,7 @@
 // 4° passo: Atribuit o método POST
 // 5° passo: Atribuit o método PUT
 // 6° passo: Atribuit o método DELETE
+// 7° passo: Ajustes para o consumo de API
 
  
 //Importando o módulo http nativo do NODE.JS
@@ -36,6 +37,17 @@ const server = http.createServer((req, res) => {
     const rota =  urlCompleta.pathname;
     const metodo = req.method;
      
+
+    // Liberação de CORS
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET", "POST", "PUT", "DELETE", "OPITIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+    if(metodo === "OPTIONS") {
+        res.statusCode = 204;
+        res.end();
+        return;
+    };
  
     // Criação do método GET
     //Com a condição ´para que a URL tenha /pedidos e o
